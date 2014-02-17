@@ -5,16 +5,16 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import openmods.Log;
 import openmods.api.*;
 import openmods.config.IRegisterableBlock;
@@ -64,10 +64,10 @@ public abstract class OpenBlock extends Block implements IRegisterableBlock {
 	protected BlockPlacementMode blockPlacementMode;
 	protected ForgeDirection inventoryRenderRotation = ForgeDirection.WEST;
 
-	public Icon[] textures = new Icon[6];
+	public IIcon[] textures = new IIcon[6];
 
-	protected OpenBlock(int id, Material material) {
-		super(id, material);
+	protected OpenBlock(Material material) {
+		super(material);
 		setHardness(1.0F);
 		setRotationMode(BlockRotationMode.NONE);
 		setPlacementMode(BlockPlacementMode.ENTITY_ANGLE);
@@ -126,9 +126,7 @@ public abstract class OpenBlock extends Block implements IRegisterableBlock {
 	 */
 	public static OpenBlock getOpenBlock(IBlockAccess world, int x, int y, int z) {
 		if (world == null) return null;
-		int id = world.getBlockId(x, y, z);
-		if (id < 0 || id >= Block.blocksList.length) return null;
-		Block block = Block.blocksList[id];
+		Block block = world.getBlock(x, y, z);
 		if (block instanceof OpenBlock) return (OpenBlock)block;
 		return null;
 	}
@@ -168,7 +166,7 @@ public abstract class OpenBlock extends Block implements IRegisterableBlock {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void registerIcons(IconRegister registry) {
+	public void registerIcons(IIconRegister registry) {
 		this.blockIcon = registry.registerIcon(String.format("%s:%s", modId, blockName));
 	}
 

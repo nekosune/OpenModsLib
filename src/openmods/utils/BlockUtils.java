@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import openmods.IInventoryProvider;
 
 public class BlockUtils {
@@ -113,7 +113,7 @@ public class BlockUtils {
 		int targetX = tile.xCoord + direction.offsetX;
 		int targetY = tile.yCoord + direction.offsetY;
 		int targetZ = tile.zCoord + direction.offsetZ;
-		return tile.worldObj.getBlockTileEntity(targetX, targetY, targetZ);
+		return tile.getWorldObj().getTileEntity(targetX, targetY, targetZ);
 	}
 
 	public static boolean moveBlock(World world, Coord src, Coord tgt, boolean allowBlockReplacement) {

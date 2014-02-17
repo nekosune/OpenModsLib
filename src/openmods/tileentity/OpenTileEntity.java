@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import openmods.block.OpenBlock;
 import openmods.network.events.TileEntityMessageEventPacket;
 import cpw.mods.fml.relauncher.Side;
@@ -88,7 +88,7 @@ public abstract class OpenTileEntity extends TileEntity {
 		 * TODO: Mikee, getBlockTileEntity returns null anyway, why the extra
 		 * block check ?
 		 */
-		if (worldObj != null && worldObj.blockExists(x, y, z)) { return worldObj.getBlockTileEntity(x, y, z); }
+		if (worldObj != null && worldObj.blockExists(x, y, z)) { return worldObj.getTileEntity(x, y, z); }
 		return null;
 	}
 

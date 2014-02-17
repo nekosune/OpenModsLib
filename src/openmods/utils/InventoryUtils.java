@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import openmods.GenericInventory;
 import openmods.integration.Integration;
 import openmods.sync.SyncableFlags;
@@ -209,7 +209,7 @@ public class InventoryUtils {
 	 * @return
 	 */
 	public static IInventory getInventory(World world, int x, int y, int z) {
-		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if (tileEntity instanceof TileEntityChest) {
 			int chestId = world.getBlockId(x, y, z);
 			if (world.getBlockId(x - 1, y, z) == chestId) return new InventoryLargeChest("Large chest", (IInventory)world.getBlockTileEntity(x - 1, y, z), (IInventory)tileEntity);
@@ -243,7 +243,7 @@ public class InventoryUtils {
 	public static IInventory getInventory(IInventory inventory) {
 		if (inventory instanceof TileEntityChest) {
 			TileEntity te = (TileEntity)inventory;
-			return getInventory(te.worldObj, te.xCoord, te.yCoord, te.zCoord);
+			return getInventory(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord);
 		}
 		return inventory;
 	}
@@ -477,7 +477,7 @@ public class InventoryUtils {
 
 			// grab the tile in the current direction
 			ForgeDirection directionToOutputItem = ForgeDirection.getOrientation(dir);
-			TileEntity tileOnSurface = currentTile.worldObj.getBlockTileEntity(currentTile.xCoord
+			TileEntity tileOnSurface = currentTile.getWorldObj().getTileEntity(currentTile.xCoord
 					+ directionToOutputItem.offsetX, currentTile.yCoord
 					+ directionToOutputItem.offsetY, currentTile.zCoord
 					+ directionToOutputItem.offsetZ);

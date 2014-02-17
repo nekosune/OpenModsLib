@@ -3,7 +3,7 @@ package openmods.utils;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class Coord {
 	public int x;
@@ -174,7 +174,7 @@ public class Coord {
 	}
 
 	public boolean isBlockNormalCube(World world) {
-		return world.isBlockNormalCube(x, y, z);
+		return world.isBlockNormalCubeDefault(x, y, z, false);
 	}
 
 	public boolean isBlockOpaqueCube(World world) {

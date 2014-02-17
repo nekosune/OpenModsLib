@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 import net.minecraftforge.client.*;
 import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 

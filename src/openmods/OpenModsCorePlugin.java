@@ -1,7 +1,8 @@
 package openmods;
 
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Logger;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
@@ -13,8 +14,8 @@ public class OpenModsCorePlugin implements IFMLLoadingPlugin {
 	public static Logger log;
 
 	static {
-		log = Logger.getLogger("OpenModsCore");
-		log.setParent(FMLLog.getLogger());
+		//log = Logger.getLogger("OpenModsCore");
+		//log.setParent(FMLLog.getLogger());
 	}
 
 	@Override
@@ -36,8 +37,7 @@ public class OpenModsCorePlugin implements IFMLLoadingPlugin {
 	public void injectData(Map<String, Object> data) {}
 
 	@Override
-	@Deprecated
-	public String[] getLibraryRequestClass() {
+	public String getAccessTransformerClass() {
 		return null;
 	}
 

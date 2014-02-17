@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import openmods.utils.BlockNotifyFlags;
 
 import com.google.common.io.ByteArrayDataInput;
@@ -46,8 +46,7 @@ public class EntityBlock extends Entity implements IEntityAdditionalSpawnData {
 	}
 
 	public static EntityBlock create(World world, int x, int y, int z, Class<? extends EntityBlock> klazz) {
-		int blockId = world.getBlockId(x, y, z);
-		Block block = Block.blocksList[blockId];
+		Block block = world.getBlock(x, y, z);
 
 		if (block == null) return null;
 
@@ -62,14 +61,14 @@ public class EntityBlock extends Entity implements IEntityAdditionalSpawnData {
 
 		if (entity == null) return null;
 
-		entity.setBlockIdAndMeta(blockId, meta);
+		entity.setBlockAndMetadata(block, meta);
 
 		if (block instanceof BlockContainer) {
-			TileEntity te = world.getBlockTileEntity(x, y, z);
+			TileEntity te = world.getTileEntity(x, y, z);
 			if (te != null) {
 				entity.tileEntity = te;
 				te.invalidate();
-				world.removeBlockTileEntity(x, y, z);
+				world.removeTileEntity(x, y, z);
 			}
 		}
 
