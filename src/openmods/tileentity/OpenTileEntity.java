@@ -104,14 +104,14 @@ public abstract class OpenTileEntity extends TileEntity {
 	}
 
 	public void sendBlockEvent(int key, int value) {
-		worldObj.addBlockEvent(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord), key, value);
+		worldObj.addBlockEvent(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), key, value);
 	}
-
+/*
 	@Override
 	public boolean shouldRefresh(int oldID, int newID, int oldMeta, int newMeta, World world, int x, int y, int z) {
 		return oldID != newID;
 	}
-
+*/
 	public OpenBlock getBlock() {
 		/* Hey look what I found */
 		if (this.blockType instanceof OpenBlock) { /*

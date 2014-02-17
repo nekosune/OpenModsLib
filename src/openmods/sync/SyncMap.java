@@ -26,8 +26,6 @@ import com.google.common.collect.*;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
-import cpw.mods.fml.common.network.Player;
-
 public abstract class SyncMap<H extends ISyncHandler> {
 
 	public enum HandlerType {
@@ -40,7 +38,7 @@ public abstract class SyncMap<H extends ISyncHandler> {
 				int z = input.readInt();
 				if (world != null) {
 					if (world.blockExists(x, y, z)) {
-						TileEntity tile = world.getBlockTileEntity(x, y, z);
+						TileEntity tile = world.getTileEntity(x, y, z);
 						if (tile instanceof ISyncHandler) return (ISyncHandler)tile;
 					}
 				}
@@ -79,7 +77,7 @@ public abstract class SyncMap<H extends ISyncHandler> {
 			public void writeHandlerInfo(ISyncHandler handler, DataOutput output) throws IOException {
 				try {
 					Entity e = (Entity)handler;
-					output.writeInt(e.entityId);
+					output.writeInt(e.getEntityId());
 				} catch (ClassCastException e) {
 					throw new RuntimeException("Invalid usage of handler type", e);
 				}
@@ -184,13 +182,13 @@ public abstract class SyncMap<H extends ISyncHandler> {
 
 			try {
 				for (EntityPlayer player : players) {
-					if (knownUsers.contains(player.entityId)) {
+					if (knownUsers.contains(player.getEntityId())) {
 						if (hasChanges) {
 							if (changePacket == null) changePacket = createPacket(false, false);
 							OpenMods.proxy.sendPacketToPlayer((Player)player, changePacket);
 						}
 					} else {
-						knownUsers.add(player.entityId);
+						knownUsers.add(player.getEntityId());
 						if (fullPacket == null) fullPacket = createPacket(true, false);
 						OpenMods.proxy.sendPacketToPlayer((Player)player, fullPacket);
 					}
