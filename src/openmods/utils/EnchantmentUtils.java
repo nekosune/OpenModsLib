@@ -7,6 +7,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -66,7 +67,7 @@ public class EnchantmentUtils {
 
 					if (!flag || k == j) {
 						if (flag) {
-							Item.enchantedBook.addEnchantment(itemstack, enchantmentdata);
+							Items.enchanted_book.addEnchantment(itemstack, enchantmentdata);
 						} else {
 							itemstack.addEnchantment(enchantmentdata.enchantmentobj, enchantmentdata.enchantmentLevel);
 						}
@@ -145,6 +146,6 @@ public class EnchantmentUtils {
 
 	public static void addAllBooks(Enchantment enchantment, List<ItemStack> items) {
 		for (int i = enchantment.getMinLevel(); i <= enchantment.getMaxLevel(); i++)
-			items.add(Item.enchantedBook.getEnchantedItemStack(new EnchantmentData(enchantment, i)));
+			items.add(Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(enchantment, i)));
 	}
 }
