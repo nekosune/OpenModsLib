@@ -1,9 +1,9 @@
 package openmods.api;
 
-import javax.swing.Icon;
 
+import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public interface IIconProvider {
-	public Icon getIcon(ForgeDirection rotatedDir);
+	public IIcon getIcon(ForgeDirection rotatedDir);
 }
