@@ -42,7 +42,7 @@ public abstract class SyncedTileEntity extends OpenTileEntity implements ISyncHa
 		try {
 			return syncMap.createPacket(true, false);
 		} catch (IOException e) {
-			Log.severe(e, "Error during description packet creation");
+			Log.error(e, "Error during description packet creation");
 			return null;
 		}
 	}

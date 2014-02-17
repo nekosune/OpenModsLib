@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import openmods.Mods;
 import cpw.mods.fml.common.Loader;
@@ -17,14 +18,14 @@ public class PaintUtils {
 
 	protected PaintUtils() {
 		allowed = new HashSet<Block>();
-		allowed.add(Block.getBlockFromName("stone"));
-		allowed.add(Block.getBlockFromName("cobblestone"));
-		allowed.add(Block.getBlockFromName("mossy_cobblestone"));
-		allowed.add(Block.getBlockFromName("sandstone"));
-		allowed.add(Block.getBlockFromName("iron_block"));
-		allowed.add(Block.getBlockFromName("stonebrick"));
-		allowed.add(Block.getBlockFromName("glass"));
-		allowed.add(Block.getBlockFromName("planks"));
+		allowed.add(Blocks.stone);
+		allowed.add(Blocks.cobblestone);
+		allowed.add(Blocks.mossy_cobblestone);
+		allowed.add(Blocks.sandstone);
+		allowed.add(Blocks.iron_block);
+		allowed.add(Blocks.stonebrick);
+		allowed.add(Blocks.glass);
+		allowed.add(Blocks.planks);
 		if (Loader.isModLoaded(Mods.TINKERSCONSTRUCT)) {
 			addBlocksForMod(Mods.TINKERSCONSTRUCT, new String[] {
 					"GlassBlock",

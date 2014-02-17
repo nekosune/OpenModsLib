@@ -4,7 +4,7 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -50,7 +50,7 @@ public abstract class BlockRenderingHandlerBase implements ISimpleBlockRendering
 		TileEntity te = null;
 		if (openBlock != null && openBlock.useTESRForInventory()) {
 			Class<? extends TileEntity> teClass = openBlock.getTileClass();
-			if (teClass != null && TileEntityRenderer.instance.specialRendererMap.containsKey(teClass)) {
+			if (teClass != null && TileEntityRendererDispatcher.instance.mapSpecialRenderers.containsKey(teClass)) {
 				te = getTileEntityForBlock(openBlock);
 				if (te instanceof OpenTileEntity) ((OpenTileEntity)te).prepareForInventoryRender(block, metadata);
 			}
@@ -63,7 +63,7 @@ public abstract class BlockRenderingHandlerBase implements ISimpleBlockRendering
 				GL11.glPushAttrib(GL11.GL_TEXTURE_BIT);
 				GL11.glPushMatrix();
 				GL11.glTranslated(-0.5, -0.5, -0.5);
-				TileEntityRenderer.instance.renderTileEntityAt(te, 0.0D, 0.0D, 0.0D, 0.0F);
+				TileEntityRendererDispatcher.instance.renderTileEntityAt(te, 0.0D, 0.0D, 0.0D, 0.0F);
 				GL11.glPopMatrix();
 				GL11.glPopAttrib();
 			}
@@ -80,7 +80,7 @@ public abstract class BlockRenderingHandlerBase implements ISimpleBlockRendering
 				RenderUtils.resetFacesOnRenderer(renderer);
 			}
 		} catch (Exception e) {
-			Log.severe(e, "Error during block '%s' rendering", block.getUnlocalizedName());
+			Log.error(e, "Error during block '%s' rendering", block.getUnlocalizedName());
 		}
 	}
 

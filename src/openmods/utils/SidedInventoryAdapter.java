@@ -103,12 +103,6 @@ public class SidedInventoryAdapter implements ISidedInventory {
 	}
 
 	@Override
-	public void openChest() {}
-
-	@Override
-	public void closeChest() {}
-
-	@Override
 	public void onInventoryChanged() {
 		inventory.onInventoryChanged();
 	}

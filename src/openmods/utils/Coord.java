@@ -176,23 +176,23 @@ public class Coord {
 	public boolean isBlockNormalCube(World world) {
 		return world.isBlockNormalCubeDefault(x, y, z, false);
 	}
-
+/*
 	public boolean isBlockOpaqueCube(World world) {
 		return world.isBlockOpaqueCube(x, y, z);
 	}
-
+*/
 	public boolean isWood(World world) {
-		Block block = Block.blocksList[getBlockID(world)];
+		Block block = world.getBlock(x, y, z);
 		return block != null && block.isWood(world, x, y, z);
 	}
 
 	public boolean isLeaves(World world) {
-		Block block = Block.blocksList[getBlockID(world)];
+		Block block = world.getBlock(x, y, z);
 		return block != null && block.isLeaves(world, x, y, z);
 	}
 
-	public int getBlockID(World world) {
-		return world.getBlockId(x, y, z);
+	public Block getBlock(World world) {
+		return world.getBlock(x, y, z);
 	}
 
 	public int getBlockMetadata(World world) {

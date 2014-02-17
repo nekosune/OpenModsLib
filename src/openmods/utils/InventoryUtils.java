@@ -2,6 +2,7 @@ package openmods.utils;
 
 import java.util.*;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.InventoryLargeChest;
@@ -211,11 +212,10 @@ public class InventoryUtils {
 	public static IInventory getInventory(World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if (tileEntity instanceof TileEntityChest) {
-			int chestId = world.getBlockId(x, y, z);
-			if (world.getBlockId(x - 1, y, z) == chestId) return new InventoryLargeChest("Large chest", (IInventory)world.getBlockTileEntity(x - 1, y, z), (IInventory)tileEntity);
-			if (world.getBlockId(x + 1, y, z) == chestId) return new InventoryLargeChest("Large chest", (IInventory)tileEntity, (IInventory)world.getBlockTileEntity(x + 1, y, z));
-			if (world.getBlockId(x, y, z - 1) == chestId) return new InventoryLargeChest("Large chest", (IInventory)world.getBlockTileEntity(x, y, z - 1), (IInventory)tileEntity);
-			if (world.getBlockId(x, y, z + 1) == chestId) return new InventoryLargeChest("Large chest", (IInventory)tileEntity, (IInventory)world.getBlockTileEntity(x, y, z + 1));
+			if (world.getBlock(x - 1, y, z) == Blocks.chest) return new InventoryLargeChest("Large chest", (IInventory)world.getTileEntity(x - 1, y, z), (IInventory)tileEntity);
+			if (world.getBlock(x + 1, y, z) == Blocks.chest) return new InventoryLargeChest("Large chest", (IInventory)tileEntity, (IInventory)world.getTileEntity(x + 1, y, z));
+			if (world.getBlock(x, y, z - 1) == Blocks.chest) return new InventoryLargeChest("Large chest", (IInventory)world.getTileEntity(x, y, z - 1), (IInventory)tileEntity);
+			if (world.getBlock(x, y, z + 1) == Blocks.chest) return new InventoryLargeChest("Large chest", (IInventory)tileEntity, (IInventory)world.getTileEntity(x, y, z + 1));
 		}
 		return (tileEntity instanceof IInventory)? (IInventory)tileEntity : null;
 	}

@@ -166,7 +166,7 @@ public class GuiComponentBook extends BaseComponent implements IComponentListene
 		}
 		if (oldIndex != index) {
 			Minecraft mc = Minecraft.getMinecraft();
-			mc.sndManager.playSoundFX("openmodslib:pageturn", 1.0F, 1.0F);
+			mc.sndManager..playSoundFX("openmodslib:pageturn", 1.0F, 1.0F);
 		}
 		enablePages();
 	}

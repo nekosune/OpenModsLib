@@ -2,6 +2,7 @@ package openmods.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -15,7 +16,7 @@ public class ItemOpenBlock extends ItemBlock {
 	}
 
 	private static boolean canReplace(Block block, World world, int x, int y, int z) {
-		return block != null && block.isBlockReplaceable(world, x, y, z);
+		return block != null && block.isReplaceable(world, x, y, z);
 	}
 
 	/**
@@ -50,8 +51,7 @@ public class ItemOpenBlock extends ItemBlock {
 
 		Block block = world.getBlock(x, y, z);
 
-		if (block == Block.snow.blockID
-				&& (world.getBlockMetadata(x, y, z) & 7) < 1) side = 1;
+		if (block == Blocks.snow_layer && (world.getBlockMetadata(x, y, z) & 7) < 1) side = 1;
 
 		ForgeDirection sideDir = ForgeDirection.getOrientation(side);
 
@@ -80,7 +80,7 @@ public class ItemOpenBlock extends ItemBlock {
 
 		if (ownBlock instanceof OpenBlock) ((OpenBlock)ownBlock).onBlockPlacedBy(world, player, stack, x, y, z, sideDir, hitX, hitY, hitZ, newMeta);
 
-		world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, ownBlock.stepSound.getPlaceSound(), (ownBlock.stepSound.getVolume() + 1.0F) / 2.0F, ownBlock.stepSound.getPitch() * 0.8F);
+		world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, field_150939_a.stepSound.func_150496_b(), (ownBlock.stepSound.getVolume() + 1.0F) / 2.0F, ownBlock.stepSound.getPitch() * 0.8F);
 		afterBlockPlaced(stack, player, world, x, y, z);
 
 		return true;

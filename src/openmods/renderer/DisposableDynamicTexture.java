@@ -5,7 +5,7 @@ import java.io.IOException;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
-import net.minecraft.client.resources.ResourceManager;
+import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 
 import com.google.common.base.Preconditions;
@@ -31,9 +31,6 @@ public class DisposableDynamicTexture extends AbstractTexture {
 		}
 	}
 
-	@Override
-	public void loadTexture(ResourceManager par1ResourceManager) throws IOException {}
-
 	public void update() {
 		Preconditions.checkNotNull(dynamicTextureData, "Texture not allocated");
 		TextureUtil.uploadTexture(getGlTextureId(), dynamicTextureData, width, height);
@@ -56,5 +53,9 @@ public class DisposableDynamicTexture extends AbstractTexture {
 
 		manager.loadTexture(location, this);
 		return location;
+	}
+
+	@Override
+	public void loadTexture(IResourceManager var1) {		
 	}
 }
