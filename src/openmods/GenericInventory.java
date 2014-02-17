@@ -33,9 +33,6 @@ public class GenericInventory implements IInventory {
 	}
 
 	@Override
-	public void closeChest() {}
-
-	@Override
 	public ItemStack decrStackSize(int par1, int par2)
 	{
 		if (this.inventoryContents[par1] != null)
@@ -67,11 +64,6 @@ public class GenericInventory implements IInventory {
 	}
 
 	@Override
-	public String getInvName() {
-		return this.inventoryTitle;
-	}
-
-	@Override
 	public int getSizeInventory() {
 		return slotsCount;
 	}
@@ -96,11 +88,6 @@ public class GenericInventory implements IInventory {
 		return null;
 	}
 
-	@Override
-	public boolean isInvNameLocalized() {
-		return isInvNameLocalized;
-	}
-
 	public boolean isItem(int slot, Item item) {
 		return inventoryContents[slot] != null
 				&& inventoryContents[slot].getItem() == item;
@@ -121,8 +108,6 @@ public class GenericInventory implements IInventory {
 			callback.onInventoryChanged(this, slotNumber);
 	}
 
-	@Override
-	public void openChest() {}
 
 	public void clearAndSetSlotCount(int amount) {
 		this.slotsCount = amount;
@@ -169,12 +154,6 @@ public class GenericInventory implements IInventory {
 		}
 		tag.setTag("Items", nbttaglist);
 	}
-
-	/**
-	 * This bastard never even gets called, so ignore it
-	 */
-	@Override
-	public void onInventoryChanged() {}
 
 	public void copyFrom(IInventory inventory) {
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {

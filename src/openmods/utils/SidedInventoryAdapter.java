@@ -83,16 +83,6 @@ public class SidedInventoryAdapter implements ISidedInventory {
 	}
 
 	@Override
-	public String getInvName() {
-		return inventory.getInvName();
-	}
-
-	@Override
-	public boolean isInvNameLocalized() {
-		return inventory.isInvNameLocalized();
-	}
-
-	@Override
 	public int getInventoryStackLimit() {
 		return inventory.getInventoryStackLimit();
 	}
@@ -100,11 +90,6 @@ public class SidedInventoryAdapter implements ISidedInventory {
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
 		return inventory.isUseableByPlayer(entityplayer);
-	}
-
-	@Override
-	public void onInventoryChanged() {
-		inventory.onInventoryChanged();
 	}
 
 	@Override
@@ -138,5 +123,13 @@ public class SidedInventoryAdapter implements ISidedInventory {
 		SlotInfo slot = slots.get(slotIndex);
 		if (slot == null) return false;
 		return slot.canExtract && slot.canAccessFromSite(side);
+	}
+
+	@Override
+	public void openInventory() {		
+	}
+
+	@Override
+	public void closeInventory() {
 	}
 }

@@ -1,6 +1,7 @@
 package openmods.sounds;
 
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -11,10 +12,14 @@ public class SoundLoader {
 	};
 
 	@SideOnly(Side.CLIENT)
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void loadingSounds(SoundLoadEvent event) {
 		for (String soundFile : soundFiles) {
+			
+			// register sounds? not needed anymore?
+			/*
 			event.manager.addSound("openmodslib:" + soundFile);
+			*/
 		}
 	}
 }

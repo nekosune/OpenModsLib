@@ -4,6 +4,7 @@ import java.util.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -33,15 +34,15 @@ public class ColorUtils {
 	public static final int WHITE = 15;
 
 	public static ItemStack createDyedWool(int color) {
-		return createDyedBlock(Block.cloth, color);
+		return createDyedBlock(Blocks.wool, color);
 	}
 
 	public static ItemStack createStainedClay(int color) {
-		return createDyedBlock(Block.stainedClay, color);
+		return createDyedBlock(Blocks.stained_hardened_clay, color);
 	}
 
 	public static ItemStack createDyedCarpet(int color) {
-		return createDyedBlock(Block.carpet, color);
+		return createDyedBlock(Blocks.carpet, color);
 	}
 
 	public static ItemStack createDyedBlock(Block block, int color) {

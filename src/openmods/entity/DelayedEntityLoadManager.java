@@ -11,6 +11,8 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
 public class DelayedEntityLoadManager {
 	public static final DelayedEntityLoadManager instance = new DelayedEntityLoadManager();
 
@@ -25,10 +27,10 @@ public class DelayedEntityLoadManager {
 				}
 			});
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onEntityCreate(EntityJoinWorldEvent evt) {
 		final Entity entity = evt.entity;
-		for (IEntityLoadListener callback : delayedLoads.removeAll(entity.entityId))
+		for (IEntityLoadListener callback : delayedLoads.removeAll(entity.getEntityId()))
 			callback.onEntityLoaded(entity);
 	}
 
