@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.google.common.base.Preconditions;
@@ -23,8 +23,7 @@ public abstract class ItemGeneric extends Item {
 
 	protected Map<Integer, IMetaItem> metaitems = Maps.newHashMap();
 
-	public ItemGeneric(int id) {
-		super(id);
+	public ItemGeneric() {
 		setHasSubtypes(true);
 		setMaxDamage(0);
 	}
@@ -41,14 +40,14 @@ public abstract class ItemGeneric extends Item {
 	}
 
 	@Override
-	public void registerIcons(IconRegister register) {
+	public void registerIcons(IIconRegister register) {
 		for (IMetaItem item : metaitems.values()) {
 			item.registerIcons(register);
 		}
 	}
 
 	@Override
-	public Icon getIconFromDamage(int i) {
+	public IIcon getIconFromDamage(int i) {
 		IMetaItem meta = getMeta(i);
 		if (meta != null) { return meta.getIcon(); }
 		return null;
@@ -92,9 +91,9 @@ public abstract class ItemGeneric extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void getSubItems(int id, CreativeTabs tab, List subItems) {
+	public void getSubItems(Item item, CreativeTabs tab, List subItems) {
 		for (Entry<Integer, IMetaItem> entry : metaitems.entrySet())
-			entry.getValue().addToCreativeList(id, entry.getKey(), subItems);
+			entry.getValue().addToCreativeList(item, entry.getKey(), subItems);
 	}
 
 	public IMetaItem getMeta(int id) {

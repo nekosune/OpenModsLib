@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -15,13 +16,13 @@ import net.minecraft.world.World;
 public class MetaGeneric implements IMetaItem {
 
 	public static class SmeltingRecipe {
-		public final int itemId;
+		public final Item item;
 		public final int itemMeta;
 		public final ItemStack result;
 		public final float experience;
 
-		private SmeltingRecipe(int itemId, int itemMeta, ItemStack result, float experience) {
-			this.itemId = itemId;
+		private SmeltingRecipe(Item item, int itemMeta, ItemStack result, float experience) {
+			this.item = item;
 			this.itemMeta = itemMeta;
 			this.result = result.copy();
 			this.experience = experience;
@@ -89,7 +90,7 @@ public class MetaGeneric implements IMetaItem {
 		for (Object tmp : recipes) {
 			if (tmp instanceof SmeltingRecipe) {
 				SmeltingRecipe recipe = (SmeltingRecipe)tmp;
-				furnaceRecipes.addSmelting(recipe.itemId, recipe.itemMeta, recipe.result, recipe.experience);
+				furnaceRecipes.func_151394_a(new ItemStack(recipe.item, 1, recipe.itemMeta), recipe.result, recipe.experience);
 			} else if (tmp instanceof IRecipe) {
 				craftingRecipes.add((IRecipe)tmp);
 			} else throw new IllegalArgumentException("Invalid recipe object: "
@@ -98,9 +99,9 @@ public class MetaGeneric implements IMetaItem {
 	}
 
 	@Override
-	public void addToCreativeList(int itemId, int meta, List<ItemStack> result) {
+	public void addToCreativeList(Item item, int meta, List<ItemStack> result) {
 		if (visibleInCreative) {
-			result.add(new ItemStack(itemId, 1, meta));
+			result.add(new ItemStack(item, 1, meta));
 		}
 	}
 

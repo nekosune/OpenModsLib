@@ -54,7 +54,7 @@ public class MovementPatcher extends ClassVisitor {
 			boolean patch = opcode == Opcodes.INVOKEVIRTUAL && calledMethodMatcher.match(name, desc);
 			if (patch) {
 				if (PlayerMovementManager.callbackInjected) {
-					OpenModsCorePlugin.log.warning("Method code mismatch, aborting");
+					OpenModsCorePlugin.log.warn("Method code mismatch, aborting");
 					PlayerMovementManager.callbackInjected = false;
 					throw new StopTransforming();
 				}

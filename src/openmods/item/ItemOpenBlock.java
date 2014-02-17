@@ -5,13 +5,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import openmods.block.OpenBlock;
 
 public class ItemOpenBlock extends ItemBlock {
 
-	public ItemOpenBlock(int id) {
-		super(id);
+	public ItemOpenBlock(Block block) {
+		super(block);
 	}
 
 	private static boolean canReplace(Block block, World world, int x, int y, int z) {
@@ -48,10 +48,9 @@ public class ItemOpenBlock extends ItemBlock {
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (!isStackValid(stack, player)) return false;
 
-		int blockId = world.getBlockId(x, y, z);
-		Block block = Block.blocksList[blockId];
+		Block block = world.getBlock(x, y, z);
 
-		if (blockId == Block.snow.blockID
+		if (block == Block.snow.blockID
 				&& (world.getBlockMetadata(x, y, z) & 7) < 1) side = 1;
 
 		ForgeDirection sideDir = ForgeDirection.getOrientation(side);
@@ -64,11 +63,10 @@ public class ItemOpenBlock extends ItemBlock {
 
 		if (!player.canPlayerEdit(x, y, z, side, stack)) return false;
 
-		int ownBlockId = getBlockID();
-		Block ownBlock = Block.blocksList[ownBlockId];
-		if (y == 255 && ownBlock.blockMaterial.isSolid()) return false;
+		Block ownBlock =  field_150939_a;
+		if (y == 255 && ownBlock.getMaterial().isSolid()) return false;
 
-		if (!world.canPlaceEntityOnSide(ownBlockId, x, y, z, false, side, player, stack)) return false;
+		if (!world.canPlaceEntityOnSide(ownBlock, x, y, z, false, side, player, stack)) return false;
 
 		// B: it's alread called in World.canPlaceEntityOnSide?
 		// if (ownBlock instanceof OpenBlock &&
