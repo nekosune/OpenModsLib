@@ -2,6 +2,7 @@ package openmods.utils;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
@@ -118,12 +119,12 @@ public class BlockUtils {
 
 	public static boolean moveBlock(World world, Coord src, Coord tgt, boolean allowBlockReplacement) {
 		if (!world.isRemote && !src.isAirBlock(world) && (tgt.isAirBlock(world) || allowBlockReplacement)) {
-			int blockID = src.getBlockID(world);
+			Block block = src.getBlock(world);
 			int metadata = src.getBlockMetadata(world);
 
-			world.setBlock(tgt.x, tgt.y, tgt.z, blockID, metadata, BlockNotifyFlags.ALL);
+			world.setBlock(tgt.x, tgt.y, tgt.z, block, metadata, BlockNotifyFlags.ALL);
 
-			if (world.blockHasTileEntity(src.x, src.y, src.z)) {
+			if (block.hasTileEntity(metadata)) {
 				TileEntity te = world.getTileEntity(src.x, src.y, src.z);
 				if (te != null) {
 					NBTTagCompound nbt = new NBTTagCompound();

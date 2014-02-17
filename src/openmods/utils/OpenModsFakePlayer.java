@@ -12,30 +12,34 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.common.FakePlayer;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.event.Event;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 
 import com.google.common.base.Preconditions;
+import com.mojang.authlib.GameProfile;
+
+import cpw.mods.fml.common.eventhandler.Event;
 
 //TODO: Discuss if we make seperate players for seperate mods
 public class OpenModsFakePlayer extends FakePlayer {
+
 	private static final Map<World, OpenModsFakePlayer> PLAYERS = new WeakHashMap<World, OpenModsFakePlayer>();
 
-	public static OpenModsFakePlayer getPlayerForWorld(World world) {
+	public static OpenModsFakePlayer getPlayerForWorld(WorldServer world, GameProfile name) {
 		OpenModsFakePlayer player = PLAYERS.get(world);
 		if (player == null) {
-			player = new OpenModsFakePlayer(world);
+			player = new OpenModsFakePlayer(world, name);
 			PLAYERS.put(world, player);
 		}
 		return player;
 	}
-
-	private OpenModsFakePlayer(World world) {
-		super(world, "OpenModsFakePlayer");
+	
+	public OpenModsFakePlayer(WorldServer world, GameProfile name) {
+		super(world, name);
 	}
 
 	@Override
@@ -81,7 +85,7 @@ public class OpenModsFakePlayer extends FakePlayer {
 
 		setRotation(pitch, hue);
 
-		inventory.clearInventory(-1, -1);
+		inventory.clearInventory(null, -1);
 		inventory.addItemStackToInventory(itemStack);
 		rightClick(
 				inventory.getCurrentItem(),
@@ -117,9 +121,9 @@ public class OpenModsFakePlayer extends FakePlayer {
 
 		if (usedItem.onItemUseFirst(itemStack, this, worldObj, x, y, z, opposite, deltaX, deltaY, deltaZ)) { return true; }
 
-		if (event.useBlock != Event.Result.DENY && (isSneaking() || usedItem.shouldPassSneakingClickToBlock(worldObj, x, y, z))) {
-			int blockId = worldObj.getBlockId(x, y, z);
-			Block block = Block.blocksList[blockId];
+		//TODO: Check doesSneakBypassUse
+		if (event.useBlock != Event.Result.DENY && (isSneaking() || usedItem.doesSneakBypassUse(worldObj, x, y, z, this))) {
+			Block block = worldObj.getBlock(x, y, z);
 			if (block != null) try {
 				if (block.onBlockActivated(worldObj, x, y, z, this, opposite, deltaX, deltaY, deltaZ)) return true;
 			} catch (Throwable t) {

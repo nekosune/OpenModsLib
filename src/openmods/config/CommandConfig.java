@@ -4,7 +4,6 @@ import java.util.*;
 
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.util.ChatMessageComponent;
 import openmods.Log;
 import openmods.config.ConfigProcessing.ModConfig;
 import openmods.utils.io.StringConversionException;

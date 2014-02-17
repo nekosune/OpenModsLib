@@ -12,6 +12,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import openmods.Log;
@@ -76,7 +78,7 @@ public class ConfigProcessing {
 	public static ModConfig getConfig(String modId) {
 		return configs.get(modId.toLowerCase());
 	}
-
+/*
 	private static void getBlock(Configuration configFile, Field field, String description) {
 		try {
 			int defaultValue = field.getInt(null);
@@ -105,13 +107,14 @@ public class ConfigProcessing {
 		}
 		return false; // Block disabled, fail silently
 	}
-
+*/
 	public static void processAnnotations(File configFile, String modId, Configuration config, Class<?> klazz) {
 		Preconditions.checkState(!configs.containsKey(modId), "Trying to configure mod '%s' twice", modId);
 		ModConfig configMeta = new ModConfig(modId, configFile, config, klazz);
 		configs.put(modId.toLowerCase(), configMeta);
 
 		for (Field f : klazz.getFields()) {
+			/*
 			{
 				ItemId a = f.getAnnotation(ItemId.class);
 				if (a != null) {
@@ -126,7 +129,7 @@ public class ConfigProcessing {
 					getBlock(config, f, a.description());
 				}
 			}
-
+			*/
 			configMeta.tryProcessConfig(f);
 		}
 	}

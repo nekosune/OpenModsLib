@@ -122,7 +122,7 @@ public class GenericInventory implements IInventory {
 		NBTTagList nbttaglist = tag.getTagList("Items");
 		inventoryContents = new ItemStack[slotsCount];
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			NBTTagCompound stacktag = (NBTTagCompound)nbttaglist.tagAt(i);
+			NBTTagCompound stacktag = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
 			int j = stacktag.getByte("Slot");
 			if (j >= 0 && j < inventoryContents.length) {
 				inventoryContents[j] = ItemStack.loadItemStackFromNBT(stacktag);

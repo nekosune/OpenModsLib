@@ -53,11 +53,11 @@ public class EnchantmentUtils {
 
 			@SuppressWarnings("unchecked")
 			List<EnchantmentData> list = EnchantmentHelper.buildEnchantmentList(rand, itemstack, level);
-			boolean flag = itemstack.itemID == Item.book.itemID;
+			boolean flag = itemstack.getItem() == Items.book;
 			if (list != null) {
 
 				if (flag) {
-					itemstack.itemID = Item.enchantedBook.itemID;
+					itemstack.func_150996_a(Items.enchanted_book); //setItem
 				}
 
 				int j = flag? rand.nextInt(list.size()) : -1;

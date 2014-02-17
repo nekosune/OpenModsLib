@@ -6,15 +6,13 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
+import cpw.mods.fml.common.eventhandler.Event;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraftforge.event.Event;
 import openmods.Log;
 import openmods.OpenMods;
 import openmods.network.events.TileEntityMessageEventPacket;
-import cpw.mods.fml.common.network.Player;
 
 public abstract class EventPacket extends Event {
 

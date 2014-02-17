@@ -29,7 +29,7 @@ public class ItemUtils {
 	public static Integer getInt(ItemStack stack, String tagName) {
 		NBTTagCompound tag = getItemTag(stack);
 		NBTBase data = tag.getTag(tagName);
-		return (data != null)? ((NBTTagInt)data).data : null;
+		return (data != null)? ((NBTTagInt)data).func_150287_d() : null;
 	}
 
 	public static EntityItem createDrop(Entity dropper, ItemStack is) {

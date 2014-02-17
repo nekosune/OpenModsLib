@@ -10,8 +10,6 @@ import java.util.Map.Entry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import openmods.LibConfig;
@@ -304,7 +302,7 @@ public abstract class SyncMap<H extends ISyncHandler> {
 			try {
 				put(field.getName(), (ISyncableObject)field.get(handler));
 			} catch (Exception e) {
-				Log.severe(e, "Exception while registering synce field '%s'", field);
+				Log.error(e, "Exception while registering synce field '%s'", field);
 			}
 		}
 	}
