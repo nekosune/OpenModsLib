@@ -124,7 +124,7 @@ public class BlockUtils {
 			world.setBlock(tgt.x, tgt.y, tgt.z, blockID, metadata, BlockNotifyFlags.ALL);
 
 			if (world.blockHasTileEntity(src.x, src.y, src.z)) {
-				TileEntity te = world.getBlockTileEntity(src.x, src.y, src.z);
+				TileEntity te = world.getTileEntity(src.x, src.y, src.z);
 				if (te != null) {
 					NBTTagCompound nbt = new NBTTagCompound();
 					te.writeToNBT(nbt);
@@ -133,7 +133,7 @@ public class BlockUtils {
 					nbt.setInteger("y", tgt.y);
 					nbt.setInteger("z", tgt.z);
 
-					te = world.getBlockTileEntity(tgt.x, tgt.y, tgt.z);
+					te = world.getTileEntity(tgt.x, tgt.y, tgt.z);
 					if (te != null) te.readFromNBT(nbt);
 				}
 			}
